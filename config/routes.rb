@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  # get 'homepage/index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  post 'questions/ask' => 'questions#ask'
 
-  # Defines the root path route ("/")
   root "homepage#index"
 end
