@@ -33,5 +33,9 @@ module Gumroad
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.before_configuration do
+      Dotenv::Railtie.load
+    end
   end
 end
