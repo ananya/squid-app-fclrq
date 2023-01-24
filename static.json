@@ -1,0 +1,13 @@
+{
+  "book_image": "https://rukminim1.flixcart.com/image/416/416/l4ln8nk0/regionalbooks/d/7/t/show-your-work-paperback-english-austin-kleon-original-imagfgrfhgf6mds4.jpeg?q=70",
+  "amazon_link": "https://www.amazon.in/Show-Your-Work-Austin-Kleon/dp/076117897X",
+  "book_title": "Show Your Work",
+  "book_author": "Austin Kleon",
+  "landing_description": "This is an experiment in using AI to make my book's content more accessible. Ask a question and AI'll answer it in real-time:",
+  "default_question": "What is the book about?",
+  "feeling_lucky_questions": [
+    "How to show your work to others?",
+    "How to build sharing into your work routine?",
+    "How to tell good stories?"
+  ]
+}

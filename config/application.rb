@@ -18,6 +18,8 @@ require "action_cable/engine"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+Dotenv.load()
+
 module Gumroad
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -33,9 +35,5 @@ module Gumroad
 
     # Don't generate system test files.
     config.generators.system_tests = nil
-
-    config.before_configuration do
-      Dotenv::Railtie.load
-    end
   end
 end
