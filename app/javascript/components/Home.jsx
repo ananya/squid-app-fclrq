@@ -30,29 +30,31 @@ const Home = () => {
       <h1 className="font-bold text-2xl" >{content.book_title}</h1>
       <p className="my-4 text-slate-500 text-lg">{content.landing_description}</p>
 
-        <form >
-          <textarea
-            name="question"
-            id="question"
-            className="shadow-md rounded-md p-2"
-            placeholder="Ask a question"
-            value={question}
-            onChange={e => setQuestion(e.target.value)}
-          />
+      <form className="justify-center items-center w-full">
+        <textarea
+          name="question"
+          id="question"
+          className="w-full box-border border-solid border-black border rounded-lg text-lg px-3 py-2"
+          placeholder="Ask a question"
+          value={question}
+          onChange={e => setQuestion(e.target.value)}
+        />
+        <div className="flex justify-center gap-4">
           <button
-            className="bg-black text-white"
+            className="bg-black text-white mt-4 w-auto py-2 px-5 rounded-lg"
             onClick={handleQuestionSubmit}
-            >
+          >
             Ask question
           </button>
 
           <button
-            className="bg-black text-white"
+            className="bg-slate-200 mt-4 w-auto py-2 px-5 rounded-lg"
             onClick={handleLuckySubmit}
-            >
+          >
             I'm Feeling Lucky
           </button>
-        </form>
+        </div>
+      </form>
     </div>
   );
 };
