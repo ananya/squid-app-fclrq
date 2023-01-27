@@ -1,20 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import content from "../../../static.json";
+import axios from 'axios'
+
 
 
 const Home = () => {
-  const [question, setQuestion] = useState(content.default_question)
+  const [question, setQuestion] = useState(content.default_question);
+  const [answer, setAnswer] = useState(null);
+  
+  const [questionSubmitter, setQuestionSubmitter] = useState(null);
 
   const handleQuestionSubmit = (e) => {
     e.preventDefault();
-    console.log("question");
+    console.log("question", question, e);
     setQuestion(question);
+    setQuestionSubmitter(true);
   }
 
   const handleLuckySubmit = (e) => {
     e.preventDefault();
     console.log("lucky");
+  }
+
+  useEffect(() => {
+    if(questionSubmitter) {
+      askQuestion().then((answer) => {
+        setAnswer(answer);
+        setQuestionSubmitter(false);
+      })
+    }
+  }, [questionSubmitter])
+
+
+  const askQuestion = async () => {
+    try {
+      const response = await axios.post("/questions/ask", { question: question });
+      console.log(response);
+      return response.data.answer;
+    } catch (error) {
+      console.log(error);
+      return Promise.reject(error);
+    }
   }
 
   return (
@@ -55,6 +82,11 @@ const Home = () => {
           </button>
         </div>
       </form>
+      {answer && (
+        <div className="mt-8">
+          <h2 className="font-bold text-2xl" >{answer}</h2>
+        </div>
+      )}
     </div>
   );
 };
