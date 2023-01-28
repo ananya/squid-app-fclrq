@@ -21,8 +21,6 @@ class AnswerService
   
   def get_answer(question)
     prompt, context = self.construct_promt(question)
-    puts "prompt", prompt
-    puts "context", context
 
     response = @openai_client.completions(
       parameters: {
@@ -32,7 +30,6 @@ class AnswerService
         model: COMPLETION_MODEL,
       }
     )
-    puts response
 
     return {:success => false} if response['choices'].length == 0
     return {:success => true, :answer => response['choices'][0]['text'], :context => context}
@@ -92,9 +89,6 @@ class AnswerService
     header = json["header"]
     questions_and_answers = json["questions_and_answers"].join(" ")
     relevant_context = self.get_relevant_context(question).join(" ")
-    puts "relevant_context", relevant_context.is_a?(String)
-    puts "header", header.is_a?(String)
-    puts "questions_and_answers", questions_and_answers.is_a?(String)
 
     preamble = header + relevant_context + questions_and_answers + "\n\n\nQ: " + question + "\n\nA: "
 
