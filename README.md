@@ -1,24 +1,50 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
 
-Things you may want to cover:
+1. Create and fill in `.env` using `.env.example` as an example.
 
-* Ruby version
+2. Install required dependencies
 
-* System dependencies
+```
+bundle install
+npm install
+```
 
-* Configuration
+Install postgres:
 
-* Database creation
+```
+brew install postgresql
+```
 
-* Database initialization
+3. Turn your PDF into embeddings for GPT-3:
 
-* How to run the test suite
+Book used here is Show Your Work and can be replaced by any other book
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+ruby scripts/pdf_to_pages_embeddings.rb book.pdf
+```
 
-* Deployment instructions
+4. Set up database tables and collect static files:
 
-* ...
+```
+rails db:migrate
+```
+
+5. Other things like book title, purchase url, cover photo, default/training questions can be changed in statis.json
+
+### Run locally
+
+```
+bin/dev
+```
+
+### Deployed
+
+This app is deployed on digital ocean : https://squid-app-fclrq.ondigitalocean.app/
+
+
+### Tech Stack Used
+
+Backend: Ruby on Rails
+Frontend: React with Typescript
+Database: Postgres
