@@ -8,7 +8,7 @@ import axios from 'axios'
 const Home = () => {
   const [question, setQuestion] = useState(content.default_question);
   const [answer, setAnswer] = useState(null);
-  
+
   const [questionSubmitter, setQuestionSubmitter] = useState(null);
 
   const handleQuestionSubmit = (e) => {
@@ -20,11 +20,20 @@ const Home = () => {
 
   const handleLuckySubmit = (e) => {
     e.preventDefault();
-    console.log("lucky");
+    randomQuestion = content.feeling_lucky_questions[Math.floor(Math.random() * content.feeling_lucky_questions.length)];
+    setQuestion(randomQuestion);
+    setQuestionSubmitter(true);
+    setAnswer(null);
+  }
+
+  const handleAskAnotherQuestion = (e) => {
+    e.preventDefault();
+    setAnswer(null);
+    setQuestion(content.default_question);
   }
 
   useEffect(() => {
-    if(questionSubmitter) {
+    if (questionSubmitter) {
       askQuestion().then((answer) => {
         setAnswer(answer);
         setQuestionSubmitter(false);
@@ -66,12 +75,13 @@ const Home = () => {
           value={question}
           onChange={e => setQuestion(e.target.value)}
         />
-        <div className="flex justify-center gap-4">
+        <div className={`${answer ? "hidden" : ""} flex justify-center gap-4`}>
           <button
             className="bg-black text-white mt-4 w-auto py-2 px-5 rounded-lg"
             onClick={handleQuestionSubmit}
+            disabled={questionSubmitter}
           >
-            Ask question
+            {questionSubmitter ? "Asking question..." : "Ask question"}
           </button>
 
           <button
@@ -87,6 +97,12 @@ const Home = () => {
           <h2 className="font-bold text-2xl" >{answer}</h2>
         </div>
       )}
+      <button
+        className={`${answer ? "" : "hidden"} bg-slate-200 mt-4 w-auto py-2 px-5 rounded-lg`}
+        onClick={handleAskAnotherQuestion}
+      >
+        Ask Another Question
+      </button>
     </div>
   );
 };
